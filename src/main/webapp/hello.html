@@ -1,0 +1,125 @@
+<!--Commented By Vikas
+<h1>Example :: Get Somu</h1>
+<li>id: <span id="_id"></span></li>
+<li>name: <span id="_name"></span></li>-->
+
+<!-- Added By Vikas Start -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Simple Form</title>
+	<style>
+		form {
+			width: 300px;
+			margin: 0 auto;
+			padding: 10px;
+			background-color: #f1f1f1;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+		}
+		
+		label {
+			display: block;
+			margin-bottom: 10px;
+		}
+		
+		input[type="text"],
+		input[type="email"],
+        input[type="date"],
+		textarea {
+			width: 100%;
+			padding: 5px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			margin-bottom: 10px;
+			box-sizing: border-box;
+		}
+		
+		input[type="submit"] {
+			background-color: #4CAF50;
+			color: #fff;
+			border: none;
+			padding: 10px;
+			border-radius: 5px;
+			cursor: pointer;
+			font-size: 16px;
+		}
+		
+		input[type="submit"]:hover {
+			background-color: #3e8e41;
+		}
+	</style>
+</head>
+<body>
+	<form>
+		<label for="name">Name:</label>
+		<input type="text" id="name" name="name" required>
+		
+		<label for="email">Email:</label>
+		<input type="email" id="email" name="email" required>
+		
+           <label for="birthday">Birthday:</label>
+           <input type="date" id="birthday" name="birthday" required> 
+          
+		<label for="message">Message:</label>
+		<textarea id="message" name="message" rows="5" required></textarea>
+		
+		<input type="submit" value="Submit">
+	</form>
+</body>
+</html>
+
+<!-- Added By Vikas Ends -->
+
+<script language="JavaScript">
+var ajax = new XMLHttpRequest();
+ajax.onload = functionName;
+ajax.onerror = errorFunctionName;
+ajax.open("GET", "http://localhost:8080/api/hello", true);
+ajax.send();
+
+function functionName() {
+    console.log(this);
+    if (this.status == 200) {
+        var json = JSON.parse(this.responseText);
+        var _id = json.id;
+        var _name = json.name;
+        document.getElementById("_id").innerHTML = _id;
+        document.getElementById("_name").innerHTML = _name;
+    } else {
+        // TODO
+    }
+}
+function errorFunctionName(e) {
+    console.log(this);
+    console.error(e);
+}
+</script>
+
+<hr/>
+<h1>Example :: Post Vivaan</h1>
+<form method="post" action="/hello">
+    <input type="text" id="name">
+    <input type="button" value="Send" onclick="sendDataToServer(form.name.value)">
+</form>
+<p id="result">Hello World</p>
+
+
+<script language="JavaScript">
+    function sendDataToServer(data) {
+        var ajax = new XMLHttpRequest();
+        ajax.onload = receiveResponse;
+        ajax.open("POST", "http://localhost:8080/api/hello", true);
+        ajax.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        ajax.send(JSON.stringify({ name: data }));
+    }
+
+    function receiveResponse() {
+        document.getElementById("result").innerHTML = this.responseText;
+        console.log(this.responseText);
+    }
+
+</script>
+
+
